@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>戴纳派克服务管理系统</title>
+</head>
+<div id="weixin-tip" style="margin: 0px; background: #0e0e0e;"></div>
+
+<body>
+
+  <script type="text/javascript">
+    goDownload();
+
+    // 去下载
+    function goDownload() {
+      var u = navigator.userAgent;
+      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+      // 这里是安卓浏览器
+      if (isAndroid) {
+        if (is_weixn()) {
+          var weixin_tip = document.getElementById("weixin-tip");
+          var img = document.createElement("img");
+          img.src = "#";
+          alert("用浏览器打开")
+          weixin_tip.appendChild(img);
+        } else {
+          window.location.href = 'https://mobile-prod.oss-cn-hangzhou.aliyuncs.com/android/dynapac.apk';
+        }
+      };
+      // 这里是iOS浏览器
+      if (isIOS) {
+        window.location.href = 'https://itunes.apple.com/cn/app/%E5%B8%88%E5%82%85%E5%88%B0/id1041861835?mt=8';
+        // 跳AppStore下载地址
+      }
+    }
+    // 微信扫码判断
+    function is_weixn() {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+      } else {
+        return false;
+      }
+    };
+  </script>
+</body>
+
+</html>
