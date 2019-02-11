@@ -4,10 +4,45 @@
 <head>
   <meta charset="UTF-8">
   <title>戴纳派克服务管理系统</title>
+
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    #weixin-tip {
+      /* display: none; */
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      filter: alpha(opacity=80);
+      height: 100%;
+      width: 100%;
+      z-index: 100;
+      /* background: rgba(0, 0, 0, 0.8); */
+    }
+
+    #weixin-tip p {
+      text-align: center;
+      margin-top: 10%;
+      padding: 0 5%;
+    }
+  </style>
 </head>
-<div id="weixin-tip" style="margin: 0px; background: #0e0e0e;"></div>
 
 <body>
+  <div id="weixin-tip"></div>
 
   <script type="text/javascript">
     goDownload();
@@ -17,22 +52,21 @@
       var u = navigator.userAgent;
       var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
       var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+      if (is_weixn()) {
+        var weixin_tip = document.getElementById("weixin-tip");
+        var img = document.createElement("img");
+        img.src = "weixin.jpg";
+        weixin_tip.appendChild(img);
+        return;
+      }
       // 这里是安卓浏览器
       if (isAndroid) {
-        if (is_weixn()) {
-          var weixin_tip = document.getElementById("weixin-tip");
-          var img = document.createElement("img");
-          img.src = "#";
-          alert("用浏览器打开")
-          weixin_tip.appendChild(img);
-        } else {
-          window.location.href = 'https://mobile-prod.oss-cn-hangzhou.aliyuncs.com/android/dynapac.apk';
-        }
-      };
-      // 这里是iOS浏览器
-      if (isIOS) {
+        window.location.href = 'https://mobile-prod.oss-cn-hangzhou.aliyuncs.com/android/dynapac.apk';
+      } else if (isIOS) {
         window.location.href = 'https://itunes.apple.com/cn/app/%E5%B8%88%E5%82%85%E5%88%B0/id1041861835?mt=8';
-        // 跳AppStore下载地址
+      } else {
+        document.write('抱歉，戴纳派克服务管理系统暂时只有安卓版和ios版APP!');
       }
     }
     // 微信扫码判断
